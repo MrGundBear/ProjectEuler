@@ -28,60 +28,47 @@ public class PE31
 	        num = Integer.parseInt(choice);
 	        start = System.currentTimeMillis();	
 		}
-		System.out.println("Count: " + pe.calcNumOfWays(num));
+		System.out.println("Count: " + pe.calcNumOfWaysQuick2(num));
 		System.out.println("\nTOOK " + ((System.currentTimeMillis() - start) / 1000.0) + " SECONDS");
 	}
 
-	public long calcNumOfWays(int money)
+	public long calcNumOfWaysQuick(int money)
 	{
-		long count = 0;
-		int sum = 0;
-		for(int i=0; i<=money/1; i++)	//for 1p piece
-		{
-			if(i%3==0)System.out.print(".");
-			sum=i;
-			for(int j=0; j<=money/2; j++)	//for 2p piece
-			{
-				sum = i+j*2;
-				if(sum>money)break;
-				for(int k=0; k<=money/5; k++)	//for 5p piece
-				{
-					sum = i + 2*j + k*5;
-					if(sum>money)break;
-					for(int l=0; l<=money/10; l++)	//for 10p piece
-					{
-						sum = i + 2*j + k*5 + l*10;
-						if(sum>money)break;
-						for(int m=0; m<=money/20; m++)	//for 20p piece
-						{
-							sum = i + 2*j + k*5 + l*10 + m*20;
-							if(sum>money)break;
-							for(int n=0; n<=money/50; n++)	//for 50p piece
-							{
-								sum = i + 2*j + k*5 + l*10 + m*20 + n*50;
-								if(sum>money)break;
-								for(int o=0; o<=money/100; o++)	//for 100p piece
-								{
-									sum = i + 2*j + k*5 + l*10 + m*20 + n*50 + o*100;
-									if(sum>money)break;
-									for(int p=0; p<=money/200; p++)	//for 200p piece
-									{
-										sum = i + 2*j + k*5 + l*10 + m*20 + n*50 + o*100 + p*200;
-										if(sum>money)break;
-										else if(sum == money)
-										{
-											if(debug)System.out.println("1p: " + i + "  2p: " + j + "  5p: " + k + "  10p: " + l + "  20p: " + m + "  50p: " + n + "  100p: " + o +  "  200p: " + p);
-											count++;
-										}
-									}	
-								}	
-							}						
-						}
-					}
-				}
-			}
+		long ways = 0;
+		for (int a = money; a >= 0; a -= 200) {
+		    for (int b = a; b >= 0; b -= 100) {
+		        for (int c = b; c >= 0; c -= 50) {
+		            for (int d = c; d >= 0; d -= 20) {
+		                for (int e = d; e >= 0; e -= 10) {
+		                    for (int f = e; f >= 0; f -= 5) {
+		                        for (int g = f; g >= 0; g -= 2) {
+		                            ways++;
+		                        }
+		                    }
+		                }
+		            }
+		        }
+		    }
 		}
-		return count;
+		return ways;
 	}
+
+	public long calcNumOfWaysQuick2(int money)
+	{
+		int target = money;
+		int[] coinSizes = { 1, 2, 5, 10, 20, 50, 100, 200 };
+		long[] ways = new long[target+1];
+		ways[0] = 1;
+		 
+		for (int i = 0; i < coinSizes.length; i++) {
+		    for (int j = coinSizes[i]; j <= target; j++) {
+		        ways[j] += ways[j - coinSizes[i]];
+		    }
+		}
+
+		return ways[target];
+	}
+
+
 }
 
