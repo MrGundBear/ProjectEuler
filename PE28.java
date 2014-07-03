@@ -9,6 +9,8 @@ import java.math.RoundingMode;
 
 public class PE28
 {	
+	//Solves in .169 seconds
+	
 	boolean debug = false;
 	boolean debug2 = true;
 	boolean prompt = true ;
