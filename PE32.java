@@ -21,8 +21,6 @@ public class PE32
 		long start = System.currentTimeMillis();	
 		PE32 pe = new PE32();
 
-		System.out.println("22 contains doubles: " + pe.containsDoubles(22,9));
-		System.out.println("241578 contains doubles: " + pe.containsDoubles(241578,9));
 
 		if(pe.prompt)
 		{
