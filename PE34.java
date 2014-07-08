@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class PE34
 {	
-
+	//takes .164 seconds with input of 41000
 
     Map<Long, Long> map =new HashMap<Long, Long>();
 
