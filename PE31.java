@@ -52,7 +52,7 @@ public class PE31
 		}
 		return ways;
 	}
-
+	//This below solution was taken from http://www.mathblog.dk/project-euler-31-combinations-english-currency-denominations/
 	public long calcNumOfWaysQuick2(int money)
 	{
 		int target = money;
